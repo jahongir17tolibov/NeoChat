@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "587221253537",
+    "firebase_url": "https://neochat-c3e71-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "neochat-c3e71",
+    "storage_bucket": "neochat-c3e71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587221253537:android:1d1d52f8ceb33b3cc8dfe0",
+        "android_client_info": {
+          "package_name": "com.jt17.neochat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587221253537-gjl3dceieve5j0jcfmf5fa6vt7ef759a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKjsZ1vSILlXW3AG4Z_ObpuNskK-V1qD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587221253537-gjl3dceieve5j0jcfmf5fa6vt7ef759a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
