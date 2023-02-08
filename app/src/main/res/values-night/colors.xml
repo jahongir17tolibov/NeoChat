@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="text_dark_light_all">#BFDFE8</color>
     <color name="header_dark_light">#042A3A</color>
+    <color name="toast_color">#80141617</color>
+    <color name="messages_color">#013951</color>
+    <color name="mess_color_lighter">#3C95BC</color>
+    <color name="floating_btn_color">#6A1B9A</color>
+    <color name="toolbar_color">#FC042A3A</color>
+    <color name="edit_text_color">#042A3A</color>
 </resources>

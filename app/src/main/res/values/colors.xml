@@ -9,4 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="text_dark_light_all">#12252A</color>
     <color name="header_dark_light">#40C4FF</color>
+    <color name="toast_color">#80A9B4B5</color>
+    <color name="messages_color">#042432</color>
+    <color name="mess_color_lighter">#0877A8</color>
+    <color name="floating_btn_color">#6A1B9A</color>
+    <color name="toolbar_color">#FC40C4FF</color>
+    <color name="edit_text_color">#FFFFFF</color>
 </resources>

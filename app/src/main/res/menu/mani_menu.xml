@@ -44,7 +44,7 @@
             android:id="@+id/menu_exitApp"
             android:icon="@drawable/ic_round_exit_to_app_24"
             android:iconTint="@color/header_dark_light"
-            android:title="Exit" />
+            android:title="Log out" />
 
     </group>
 

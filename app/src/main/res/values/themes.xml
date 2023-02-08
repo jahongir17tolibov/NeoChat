@@ -3,17 +3,15 @@
     <style name="Theme.NeoChat" parent="Theme.Material3.Light.NoActionBar">
 
         <item name="android:windowTranslucentStatus">true</item>
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBarOverlay">false</item>
 
         <item name="android:colorBackground">@color/white</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:windowContentOverlay">@null</item>
         <item name="android:colorPrimaryDark">#414750</item>
         <item name="android:colorPrimary">#486EA6</item>
         <item name="android:navigationBarColor">#000000</item>
+        <item name="android:windowContentOverlay">@null</item>
 
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -34,6 +32,14 @@
 
     <style name="dark_light_icon_btn">
         <item name="android:src">@drawable/ic_baseline_dark_mode_24</item>
+    </style>
+
+    <style name="chat_background">
+        <item name="android:background">@drawable/background_for_light</item>
+    </style>
+
+    <style name="ShapedImage_img_uploading">
+        <item name="cornerSize">17dp</item>
     </style>
 
 </resources>

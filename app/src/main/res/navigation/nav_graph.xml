@@ -5,48 +5,68 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/baseFragment">
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.jt17.neochat.ui.fragments.BlankFragment"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" >
-        <action
-            android:id="@+id/action_blankFragment_to_blankFragment2"
-            app:destination="@id/blankFragment2"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
-        <action
-            android:id="@+id/action_blankFragment_to_baseFragment"
-            app:destination="@id/baseFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/blankFragment2"
-        android:name="com.jt17.neochat.ui.fragments.BlankFragment2"
-        android:label="fragment_blank2"
-        tools:layout="@layout/fragment_blank2" />
-    <fragment
-        android:id="@+id/blankFragment3"
-        android:name="com.jt17.neochat.ui.fragments.BlankFragment3"
-        android:label="fragment_blank3"
-        tools:layout="@layout/fragment_blank3" />
-    <fragment
         android:id="@+id/baseFragment"
-        android:name="com.jt17.neochat.ui.fragments.BaseFragment"
+        android:name="com.jt17.neochat.view.fragments.BaseFragment"
         android:label="fragment_base"
-        tools:layout="@layout/fragment_base" >
+        tools:layout="@layout/fragment_base">
         <action
-            android:id="@+id/action_baseFragment_to_blankFragment"
-            app:destination="@id/blankFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_baseFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment" />
+        <argument
+            android:name="names_intoLoginSignUp"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="names_intoSignUpFragment"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.jt17.neochat.ui.fragments.SignInFragment"
+        android:name="com.jt17.neochat.view.fragments.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" />
+        tools:layout="@layout/fragment_sign_in">
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_baseFragment"
+            app:destination="@id/baseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.jt17.neochat.ui.fragments.SignUpFragment"
+        android:name="com.jt17.neochat.view.fragments.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_baseFragment"
+            app:destination="@id/baseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatsFragment"
+        android:name="com.jt17.neochat.view.fragments.ChatsFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat">
+        <argument
+            android:name="chats_model"
+            app:argType="com.jt17.neochat.view.models.MessageModel"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.jt17.neochat.view.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_baseFragment"
+            app:destination="@id/baseFragment" />
+    </fragment>
 </navigation>

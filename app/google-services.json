@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "587221253537-iidf9v2lp0mdgr23ii3f4sdlj4jkbau8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jt17.neochat",
+            "certificate_hash": "53f7639c36cfd655b11a0f48860a55d280b51007"
+          }
+        },
+        {
           "client_id": "587221253537-gjl3dceieve5j0jcfmf5fa6vt7ef759a.apps.googleusercontent.com",
           "client_type": 3
         }

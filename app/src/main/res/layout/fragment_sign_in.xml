@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.SignInFragment">
+    android:fitsSystemWindows="true"
+    tools:context=".view.fragments.SignInFragment">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_baseline_message_24"
+        android:src="@drawable/base_icon"
         app:layout_constraintBottom_toTopOf="@+id/materialCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#0099CC"
         android:padding="10dp"
         android:text="Welcome!\nSign in to continue"
-        android:textColor="@color/white"
+        android:textColor="#0099CC"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/materialCardView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -47,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Type your Email"
-            android:textColor="@color/black"
+            android:textColor="@color/text_dark_light_all"
             android:textSize="16sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -56,7 +57,7 @@
         android:id="@+id/textInputLayout"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:boxStrokeColor="#0099CC"
         app:hintTextColor="#0099CC"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Type your Password"
-            android:textColor="@color/black"
+            android:textColor="@color/text_dark_light_all"
             android:textSize="16sp" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -79,7 +80,7 @@
         android:id="@+id/sign_in_btn"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@android:color/holo_blue_dark"
         android:text="Sign In"
         android:textAllCaps="true"
@@ -89,6 +90,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/sign_in_with_facebook"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:background="?selectableItemBackground"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        app:cardBackgroundColor="@color/white"
+        app:cornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_with_google"
+        app:strokeColor="@android:color/holo_blue_dark"
+        app:strokeWidth="1dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="12dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/icons8_facebook" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="with facebook"
+                android:textAllCaps="true"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/sign_in_with_google"
@@ -115,14 +158,15 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="12dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/google_icon_logo_svgrepo_com" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Sign in with Google"
-                android:textAllCaps="false"
+                android:text="with Google"
+                android:textAllCaps="true"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -138,11 +182,11 @@
         android:layout_marginTop="16dp"
         android:background="?android:selectableItemBackground"
         android:text="Not Registered Yet, Sign Up!"
-        android:textColor="@color/black"
+        android:textColor="@color/text_dark_light_all"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_with_google" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_with_facebook" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

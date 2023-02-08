@@ -5,8 +5,8 @@
     android:id="@+id/drawer_ly"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.BaseFragment"
-    tools:openDrawer="start">
+    android:fitsSystemWindows="true"
+    tools:context=".view.fragments.BaseFragment">
 
     <include
         android:id="@+id/app_bar_id"
