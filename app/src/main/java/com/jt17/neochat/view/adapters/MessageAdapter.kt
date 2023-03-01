@@ -100,7 +100,10 @@ class MessageAdapter : RecyclerView.Adapter<MessageViewHolder>() {
         }
     }
 
+    
+
 }
+
 
 open class MessageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     open fun messageBind(messageMain: MessageModel) {}

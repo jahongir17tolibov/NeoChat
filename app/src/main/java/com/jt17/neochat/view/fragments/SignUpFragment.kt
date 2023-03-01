@@ -1,5 +1,6 @@
 package com.jt17.neochat.view.fragments
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -23,6 +26,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.jt17.neochat.R
+import com.jt17.neochat.databinding.ActivityMainBinding
 import com.jt17.neochat.databinding.FragmentSignUpBinding
 import com.jt17.neochat.utils.PrefUtils
 
@@ -35,6 +39,7 @@ class SignUpFragment : Fragment() {
     private val database = Firebase.database
     private val myRef = database.getReference("users")
     private val navigation by lazy { findNavController() }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -95,8 +100,7 @@ class SignUpFragment : Fragment() {
                         requireContext(),
                         "Password is not matching !!",
                         Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ).show()
                 }
             }
         } else {
@@ -105,35 +109,31 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun signInGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        launcher.launch(signInIntent)
+    }
 
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-                firebaseAuthWithGoogle(account)
-            } catch (e: ApiException) {
-                Toast.makeText(requireContext(), "Google sign in failed", Toast.LENGTH_SHORT).show()
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                handleResults(task)
             }
         }
 
-    }
-
-    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
-        firebaseAuth = Firebase.auth
-        val credintal = GoogleAuthProvider.getCredential(account.idToken!!, null)
-        firebaseAuth.signInWithCredential(credintal).addOnCompleteListener(requireActivity()) {
-            if (it.isSuccessful) {
-                val user = firebaseAuth.currentUser
-                updateUI(user, account)
-            } else {
-                Toast.makeText(requireContext(), it.exception.toString(), Toast.LENGTH_SHORT).show()
-            }
+    private fun handleResults(task: Task<GoogleSignInAccount>) {
+        val account: GoogleSignInAccount? = task.result
+        if (account != null) {
+            updateUI(account)
+        } else {
+            Toast.makeText(requireContext(), task.exception.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun updateUI(user: FirebaseUser?, account: GoogleSignInAccount?) {
+    private fun updateUI(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        val user: FirebaseUser? = firebaseAuth.currentUser
         if (user != null) {
             Toast.makeText(
                 requireContext(),
@@ -141,37 +141,40 @@ class SignUpFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         } else {
-            val googleName = account?.displayName.toString()
-            myRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
+            firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val googleName = account.displayName.toString()
+                    myRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(snapshot: DataSnapshot) {
 
-                    if (snapshot.hasChild(googleName)) {
-                        Toast.makeText(
-                            requireContext(),
-                            "User already exists",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        myRef.child(googleName).child("name").setValue(googleName)
-                    }
-                    PrefUtils.firstRegister = googleName
-                    val action = SignUpFragmentDirections.actionSignUpFragmentToBaseFragment(
-                        null,
-                        googleName
-                    )
-                    navigation.navigate(action)
+                            if (snapshot.hasChild(googleName)) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "User already exists",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                myRef.child(googleName).child("name").setValue(googleName)
+                            }
+                            PrefUtils.firstRegister = googleName
+                            val action =
+                                SignUpFragmentDirections.actionSignUpFragmentToBaseFragment(
+                                    null,
+                                    googleName
+                                )
+                            navigation.navigate(action)
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+
+                    })
+                } else {
+                    Toast.makeText(requireContext(), it.exception.toString(), Toast.LENGTH_SHORT)
+                        .show()
                 }
-
-                override fun onCancelled(error: DatabaseError) {
-                }
-
-            })
+            }
         }
-    }
-
-    private fun signInGoogle() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
     private fun googleUsersFirebaseAuth() {

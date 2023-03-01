@@ -17,11 +17,13 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import com.jt17.neochat.R
 import com.jt17.neochat.view.adapters.MessageAdapter
 import com.jt17.neochat.databinding.FragmentChatBinding
 import com.jt17.neochat.view.models.MessageModel
 import com.jt17.neochat.utils.DataUtils
 import com.jt17.neochat.utils.PrefUtils
+import com.jt17.neochat.view.adapters.CustomPositionItemDecoration
 import java.util.Date
 
 class ChatsFragment : Fragment() {
@@ -104,7 +106,7 @@ class ChatsFragment : Fragment() {
     }
 
     private fun initRecyc() {
-        binding.charRecyc.run {
+        binding.charRecyc.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = messageAdapter
